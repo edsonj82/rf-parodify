@@ -1,13 +1,12 @@
 *** Settings ***
 Library   Browser    jsextension=${EXECDIR}/resources/module.js
 
+Test Setup      Start session
+Test Teardown   Finish session
+
 *** Test Cases ***
 Should play a music
     ${song_name}    Set Variable    Smells Like Test Script
-    
-    New Browser     browser=chromium                headless=False
-    # New Page        https://parodify.vercel.app/
-    New Page        about:blank
 
     Mock My Song
 
@@ -23,6 +22,14 @@ Should play a music
     Wait For Elements State    ${play}      visible    7
 
 *** Keywords ***
+Start session
+    New Browser     browser=chromium                headless=False
+    # New Page        https://parodify.vercel.app/
+    New Page        about:blank
+
+Finish session
+    Take Screenshot
+
 Get play button
     [Arguments]        ${song_name}
     #xpath= //div[contains(@class,"song")]//h6[text()="Bughium"]/..//button[contains(@class,"play")]

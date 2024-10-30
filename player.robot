@@ -11,11 +11,8 @@ Should play a music
     Go To    https://parodify.vercel.app/
     Get Text        css=.logged-user    contains    Fernando Papito
     
-    #xpath= //div[contains(@class,"song")]//h6[text()="Bughium"]/..//button[contains(@class,"play")]
-
-    ${play}    Get play button    Smells Like Test Script
-    ${pause}        Set Variable        
-    ...    //div[contains(@class,"song")]//h6[text()="Smells Like Test Script"]/..//button[contains(@class,"pause")]
+    ${play}     Get play button     Smells Like Test Script
+    ${pause}    Get pause button    Smells Like Test Script
     
     Click    ${play}
 
@@ -25,8 +22,16 @@ Should play a music
 *** Keywords ***
 Get play button
     [Arguments]        ${song_name}
-
+    #xpath= //div[contains(@class,"song")]//h6[text()="Bughium"]/..//button[contains(@class,"play")]
     ${play}        Set Variable        
     ...    //div[contains(@class,"song")]//h6[text()="${song_name}"]/..//button[contains(@class,"play")]
 
-    RETURN        ${play}    
+    RETURN        ${play}
+
+Get pause button    
+    [Arguments]        ${song_name}
+
+    ${pause}        Set Variable        
+    ...    //div[contains(@class,"song")]//h6[text()="${song_name}"]/..//button[contains(@class,"pause")]
+
+    RETURN        ${pause}

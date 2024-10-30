@@ -3,16 +3,19 @@ Library   Browser    jsextension=${EXECDIR}/resources/module.js
 
 *** Test Cases ***
 Should play a music
+    ${song_name}    Set Variable    Smells Like Test Script
+    
     New Browser     browser=chromium                headless=False
     # New Page        https://parodify.vercel.app/
     New Page        about:blank
+
     Mock My Song
 
     Go To    https://parodify.vercel.app/
     Get Text        css=.logged-user    contains    Fernando Papito
     
-    ${play}     Get play button     Smells Like Test Script
-    ${pause}    Get pause button    Smells Like Test Script
+    ${play}     Get play button     ${song_name}
+    ${pause}    Get pause button    ${song_name}
     
     Click    ${play}
 

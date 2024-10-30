@@ -12,9 +12,8 @@ Should play a music
     Get Text        css=.logged-user    contains    Fernando Papito
     
     #xpath= //div[contains(@class,"song")]//h6[text()="Bughium"]/..//button[contains(@class,"play")]
-    ${play}        Set Variable        
-    ...    //div[contains(@class,"song")]//h6[text()="Smells Like Test Script"]/..//button[contains(@class,"play")]
-    
+
+    ${play}    Get play button    Smells Like Test Script
     ${pause}        Set Variable        
     ...    //div[contains(@class,"song")]//h6[text()="Smells Like Test Script"]/..//button[contains(@class,"pause")]
     
@@ -22,3 +21,12 @@ Should play a music
 
     Wait For Elements State    ${pause}     visible    2
     Wait For Elements State    ${play}      visible    7
+
+*** Keywords ***
+Get play button
+    [Arguments]        ${song_name}
+
+    ${play}        Set Variable        
+    ...    //div[contains(@class,"song")]//h6[text()="${song_name}"]/..//button[contains(@class,"play")]
+
+    RETURN        ${play}    
